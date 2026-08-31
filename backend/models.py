@@ -126,3 +126,16 @@ class SymptomLog(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     triage_session = relationship("TriageSession")
+
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    action = Column(String, nullable=False)          # e.g. "VIEW_PATIENT", "LOGIN"
+    resource_type = Column(String, nullable=True)     # e.g. "Patient", "Appointment"
+    resource_id = Column(Integer, nullable=True)
+    details = Column(Text, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")

@@ -3,7 +3,7 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 import os
 from dotenv import load_dotenv
-from audit import log_action
+
 load_dotenv()
 
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "fallback-dev-secret-change-this")
